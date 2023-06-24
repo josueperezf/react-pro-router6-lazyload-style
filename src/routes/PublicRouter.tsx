@@ -1,4 +1,5 @@
 import { RouteObject, Navigate } from "react-router-dom";
+import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
 
 /**
  * aqui podemos colocar otros subRouters, ejemplo un router para empleados, entonces creariamos algo como
@@ -9,8 +10,9 @@ import { RouteObject, Navigate } from "react-router-dom";
 
 
 export const publicRouter: RouteObject[] = [
-    {path: "about", element: <h1>about page</h1> },
-    {path: "users", element: <h1>users page</h1> },
-    {path: "/", element: <h1>home page</h1> },
-    {path: "/*", element: <Navigate to={"/"} replace  /> },
+    {path: "lazy1", element: <LazyPage1 /> },
+    {path: "lazy2", element: <LazyPage2 /> },
+    {path: "lazy3", element: <LazyPage3 /> },
+    {path: "/", element: <Navigate to={"/lazy1"} replace  /> },
+    {path: "/*", element: <Navigate to={"/lazy1"} replace  /> },
 ];
