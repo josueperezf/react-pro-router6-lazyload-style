@@ -7,7 +7,7 @@ import { lazy } from "react";
  * claro ye tendria 'empleados' como base, ahora sus path seria algo como '/:id' para ver empleado por id, ejemplo
 */
 
-
+// webpackChunkName lo coloco fernando aunque creo que no lo necesitamos ya que el lo realizo create-react-project, y yo con vite que supuestamente es mejor y no tiene webpack al menos eso creo 
 const LazyPage1 = lazy(() => import( /*webpackChunkName: "LazyPage1" */ "../pages/LazyPage1"));
 const LazyPage2 = lazy(() => import( /*webpackChunkName: "LazyPage2" */ "../pages/LazyPage2"));
 const LazyPage3 = lazy(() => import( /*webpackChunkName: "LazyPage3" */ "../pages/LazyPage3"));
