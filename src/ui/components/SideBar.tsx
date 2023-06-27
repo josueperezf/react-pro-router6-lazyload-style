@@ -7,14 +7,16 @@ export const SideBar = () => {
         <img src={logo} alt='React Logo' />
         <ul>
             <li>
-                <NavLink to={'/lazy1'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>lazy1</NavLink>
+                <NavLink to={'/lazyLayout'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>Modulo perezoso lazyLayout</NavLink>
             </li>
             <li>
-                <NavLink to={'/lazy2'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>lazy2</NavLink>
+                <NavLink to={'/sin-lazy'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>componente sin-lazy</NavLink>
             </li>
-            <li>
-                <NavLink to={'/lazy3'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>lazy3</NavLink>
-            </li>
+
+            {/* <li>
+                <NavLink to={'/lazyLayout/lazy2'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>lazyLayout lazy2</NavLink>
+            </li> */}
+            
         </ul>
     </nav>
   )

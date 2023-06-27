@@ -1,6 +1,8 @@
+import { lazy } from 'react';
 import { RouteObject} from "react-router-dom";
-import { LazyRouter } from "../01-lazyload/router/lazyRouter";
+import { SinLazy } from "../01-lazyload/pages/SinLazy";
 
+// const LazyLayout = lazy(() => import( /*webpackChunkName: "LazyPage3" */ "../01-lazyload/layout/LazyLayout"));
 
 /**
  * aqui podemos colocar otros subRouters, ejemplo un router para empleados, entonces creariamos algo como
@@ -12,8 +14,13 @@ import { LazyRouter } from "../01-lazyload/router/lazyRouter";
 
 export const publicRouter: RouteObject[] = [
     {
-        path: "/*",
-        children: [...LazyRouter]
+        path: "/",
+        children: [
+            {path: 'lazyLayout/*', 
+            Component: lazy( () => import(/* webpackChunkName: "LazyLayout" */ '../01-lazyload/layout/LazyLayout') ),
+        },
+            {path: 'sin-lazy', Component: SinLazy}
+        ]
     },
 
 ];
