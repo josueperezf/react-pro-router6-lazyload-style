@@ -7,7 +7,7 @@ export const SideBar = () => {
         <img src={logo} alt='React Logo' />
         <ul>
             <li>
-                <NavLink to={'/'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>Home</NavLink>
+                <NavLink to={'/'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>ShoppingPage</NavLink>
             </li>
             <li>
                 <NavLink to={'/about'} className={ ({isActive}) => isActive ? 'nav-active' : '' }>About</NavLink>

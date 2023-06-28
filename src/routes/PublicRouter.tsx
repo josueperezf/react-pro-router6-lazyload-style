@@ -1,4 +1,5 @@
 import { RouteObject, Navigate } from "react-router-dom";
+import { ShoppingPage } from "../02-patrones-de-componente_component-patterns/pages/ShoppingPage";
 
 /**
  * aqui podemos colocar otros subRouters, ejemplo un router para empleados, entonces creariamos algo como
@@ -11,6 +12,6 @@ import { RouteObject, Navigate } from "react-router-dom";
 export const publicRouter: RouteObject[] = [
     {path: "about", element: <h1>about page</h1> },
     {path: "users", element: <h1>users page</h1> },
-    {path: "/", element: <h1>home page</h1> },
+    {path: "/", element: <ShoppingPage/> },
     {path: "/*", element: <Navigate to={"/"} replace  /> },
 ];
