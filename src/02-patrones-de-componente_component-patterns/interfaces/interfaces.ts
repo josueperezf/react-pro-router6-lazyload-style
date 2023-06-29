@@ -10,16 +10,32 @@ export interface Product {
 
 export interface ProductCardProps {
     product : Product,
-    children?: ReactElement | ReactElement[]
+    children?: ReactElement | ReactElement[],
+    className? : string,
+    style?: React.CSSProperties,  // el nombre del tipo de dato lo obtuve gracias a colocar el mouse sobre un div al que le haya colocar un style, alli me moestro React.CSSProperties
 }
 
+export interface ProductImageProps {
+    className?: string;
+    img?: string;
+    style?: React.CSSProperties,  // el nombre del tipo de dato lo obtuve gracias a colocar el mouse sobre un div al que le haya colocar un style, alli me moestro React.CSSProperties
+}
+export interface ProductTitleProps {
+    className?: string;
+    title?: string,
+    style?: React.CSSProperties,  // el nombre del tipo de dato lo obtuve gracias a colocar el mouse sobre un div al que le haya colocar un style, alli me moestro React.CSSProperties
+  }
 
+export interface ProductButtonsProps {
+    className?: string,
+    style?: React.CSSProperties,  // el nombre del tipo de dato lo obtuve gracias a colocar el mouse sobre un div al que le haya colocar un style, alli me moestro React.CSSProperties
+}
 
 export interface ProductContextProps {
     counter: number,
+    product: Product,
     decrementarPor: (value: number) => void,
     incrementarPor: (value: number) => void,
-    product: Product
 }
 
 // HOC o mejor dicho high order component, es un componente que recibe compontes y los muestra en su interior 'children'
@@ -27,7 +43,7 @@ export interface ProductContextProps {
 
 export interface ProductCardHOCProps {
     ({ children, product }: ProductCardProps): JSX.Element,
-    Image: ({ img }: { img?: string  }) => JSX.Element;
-    Title: ({ title }: {title?: string }) => JSX.Element;
-    Buttons: () => JSX.Element;
+    Image:   (parametros: ProductImageProps) => JSX.Element;
+    Title:   (parametros: ProductTitleProps) => JSX.Element;
+    Buttons: (parametros: ProductButtonsProps) => JSX.Element;
 }

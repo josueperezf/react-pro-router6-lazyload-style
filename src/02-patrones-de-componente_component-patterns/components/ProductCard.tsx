@@ -8,13 +8,15 @@ import { ProductCardProps, ProductContextProps } from '../interfaces/interfaces'
 export const ProductContext = createContext<ProductContextProps>({} as ProductContextProps);
 const {Provider} = ProductContext;
 
+// este componente lo relacionamos con sus componentes hijos, 'productTitle, productImage etc ' en el archivo index.ts de la carpeta components, alli hay un codigo especial para ello
 
-export const ProductCard = ({ children, product }: ProductCardProps) => {
+// si por ejemplo style o clasname no vienen, no hay problema, al ser null react no lo pone y ya
+export const ProductCard = ({ children, product, className, style }: ProductCardProps) => {
     const { counter, decrementarPor, incrementarPor} = useProduct();
     
     return (
         <Provider value={{counter, product, decrementarPor, incrementarPor}}>
-            <div className={styles.productCard}>
+            <div className={`${styles.productCard} ${className}` } style={style} >
                 {children}
                 {/* <ProductImage img={product.img} />
                 <ProductTitle title={product.title} />
@@ -24,9 +26,3 @@ export const ProductCard = ({ children, product }: ProductCardProps) => {
         </Provider>
     )
 }
-
-// el siguiente bloque se comenta porque segun fernando se ve feo, ademas puede arrojar problemas al momento de las importaaciones, asi que lo hicimos en el archivo index del la carpeta 'components/'
-// lo siguientes es para hacer otra forma de colocar ProductTitle, y poder colocar ProductCard.Title, para relacionarlos
-// ProductCard.Image = ProductImage;
-// ProductCard.Title = ProductTitle;
-// ProductCard.Buttons = ProductButtons;
