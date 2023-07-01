@@ -11,8 +11,10 @@ const {Provider} = ProductContext;
 // este componente lo relacionamos con sus componentes hijos, 'productTitle, productImage etc ' en el archivo index.ts de la carpeta components, alli hay un codigo especial para ello
 
 // si por ejemplo style o clasname no vienen, no hay problema, al ser null react no lo pone y ya
-export const ProductCard = ({ children, product, className, style }: ProductCardProps) => {
-    const { counter, decrementarPor, incrementarPor} = useProduct();
+export const ProductCard = ({ children, product, className, style, value, onChange }: ProductCardProps) => {
+    // value es el valor inicial que le queremos dar al contador
+    
+    const { counter, decrementarPor, incrementarPor} = useProduct({onChange, product, value});
     
     return (
         <Provider value={{counter, product, decrementarPor, incrementarPor}}>

@@ -7,12 +7,21 @@ export interface Product {
     title: string,
     img?: string
 }
-
+export interface ProductoEnElCarrito extends Product {
+    count: number
+}
+// los argumentos que recibe el metodo de productcard cada vez que alguien presiona el boton para aumentar o disminuir los producto que quiere comprar
+export interface onChangeArgs {
+    product: Product,
+    count: number
+}
 export interface ProductCardProps {
     product : Product,
     children?: ReactElement | ReactElement[],
     className? : string,
     style?: React.CSSProperties,  // el nombre del tipo de dato lo obtuve gracias a colocar el mouse sobre un div al que le haya colocar un style, alli me moestro React.CSSProperties
+    value?: number, // es para es valor inicial que puede tener el contador donde estan los botones
+    onChange?: (args: onChangeArgs) => void
 }
 
 export interface ProductImageProps {
