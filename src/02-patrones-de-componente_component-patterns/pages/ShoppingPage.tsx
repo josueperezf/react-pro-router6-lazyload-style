@@ -1,7 +1,7 @@
 import { ProductCard } from '../components';
-import { Product, ProductoEnElCarrito, onChangeArgs } from '../interfaces/interfaces';
+import { useShoppingCarroDeCompra } from '../hooks/useShoppingCarroDeCompra';
+import { Product } from '../interfaces/interfaces';
 import '../styles/custom-styles.css'
-import { useState } from 'react';
 
 const products: Product[] = [
   {
@@ -36,46 +36,7 @@ const products: Product[] = [
 
 
 export const ShoppingPage = () => {
-  // para mi los elementos del carrito deberian ser un array, pero fernando prefirio hacerlo como un objeto
-  const [shoppingCart, setShoppingCart] = useState<{ [key:string]: ProductoEnElCarrito }>({
-    // '1': {...products[0], count: 10 }, // ejemplo de data, el indice de cada objeto es el id del producto, hara referencia al objeto y a la cantidad de productos q el cliente quiera comprar de ese producto
-    // '2': {...products[1], count: 4 },
-  });
-
-  const onProductCountChange = ({count, product}: onChangeArgs) => {
-    // count tiene valor 1 para incrementar y -1 para restar al carrito de compra.
-    console.log({count});
-    
-    setShoppingCart((oldShoppingCart)=> {
-      // count es la cantidad de articulos que desea llevar de ese producto
-
-      // vemos si el producto esta en el objeto oldShoppingCart, si no está, lo creamos con {...product, count: 0} y lo asignamos a la variable 'productoAProcesar'
-      const productoAProcesar = oldShoppingCart[product.id] || {...product, count: 0} ;
-      // el count que recibimos solo puede tener valores de 1 o -1, en cambio el count de  productoAProcesar es un contador normal que indica el numero de productos que desea llevar el cliente.
-      // 'productoAProcesar.count + count' -> esto seria algo como  (2 + (+1)) 0 (2 + (-1)) donde signos iguales se suman y diferentes se restan
-      // comparamos ese resultado con 0, y si es menos a cero dejara cero, si es mayor a cero, dejara el mayor, por eso la funcion de javascript se llama .max de mayor
-
-      // si entra al if es que su velor no es cero y debemos incrementar en el carro de compra
-      if (Math.max(productoAProcesar.count + count, 0) > 0) {
-        productoAProcesar.count += count;
-        return {...shoppingCart, [product.id]: productoAProcesar }
-      }
-
-      // si no entro en el if anterior, entonces hay que borrar el producto del carrito de compra, lo borramos con la siguiente linea
-      const {[product.id]: productoAEliminarDeCarritoDeCompra, ...rest} = oldShoppingCart;
-      return rest;
-
-      // if (count == 0) {
-      //   // delete oldShoppingCart[product.id];esta linea sirve pero esta mutando y es mala practica
-      //   // return {...shoppingCart};
-      //   const {[product.id]: productoAEliminarDeCarritoDeCompra, ...rest} = oldShoppingCart;
-      //   return rest;
-      // }
-      // return {...shoppingCart, [product.id]: {...product, count} }
-    });
-    console.log({shoppingCart});
-    
-  }
+  const { shoppingCart, onProductCountChange} = useShoppingCarroDeCompra();
   return (
     <div>
         <h1>Shopping Store</h1>
