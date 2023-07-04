@@ -1,20 +1,23 @@
-import { useState, useEffect } from 'react'
-import { Product, onChangeArgs } from '../interfaces/interfaces';
+import { useState, useEffect } from 'react';
+import { InitialValues, Product, onChangeArgs } from '../interfaces/interfaces';
 
 interface useProductArgs {
     product: Product,
     value?: number,
+    initialValues?: InitialValues
     onChange?: (args: onChangeArgs) => void
 }
-export const useProduct = ({ onChange, product, value = 0}: useProductArgs) => {
-    const [counter, setCounter] = useState<number>(value);
+export const useProduct = ({ onChange, product, value = 0, initialValues}: useProductArgs) => {
+    const [counter, setCounter] = useState<number>(initialValues?.count || value);
 
     useEffect(() => {
+        if (initialValues?.count) return; // si tiene data del initialValues, entonces no necesito que utilice el value para nada, con esto evito que haga set del value
         setCounter(value);
-    }, [value])
+    }, [value, initialValues?.count])
     
 
     const incrementarPor = (value : number) => {
+        if (initialValues?.maxCount && (initialValues?.maxCount === counter)) return;
         actualizarValue(+value);
     }
     const decrementarPor = (value : number) => {
@@ -31,11 +34,19 @@ export const useProduct = ({ onChange, product, value = 0}: useProductArgs) => {
         setCounter(newValue);
         onChange && onChange({count: newValue, product});
     }
+
+    const reset = () => {
+        setCounter(initialValues?.count || value);
+    }
+
     return {
         //*Properties
         counter,
+        maxCount: initialValues?.maxCount,
+        isMaxCountReached: !!initialValues?.count && initialValues.maxCount === counter, // es para saber si alcanzo el valor maximo el contador, si en el initialValues no vandaron el count, entonces es como si este campo no existiera, como un falso
         //* Methods
-        incrementarPor,
         decrementarPor,
+        incrementarPor,
+        reset,
     }
 }
